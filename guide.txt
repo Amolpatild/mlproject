@@ -1,0 +1,50 @@
+# ML project
+
+1. open the anaconda propmt---> change the dir
+2. code .(open VS code)--> Terminal-->command prompt
+3. create conda enviornment-->conda create -p venv python==3.8 -y
+4. conda activate venv/
+5. Create README.md
+-->git add README.md
+--> git commit -m "First Commit"
+-->git branch -M main
+-->git remote add origin https://github.com/Amolpatild/mlproject.git
+-->git config --global user.name "John Doe"
+-->git config --global user.email johndoe@example.com
+-->git remote -v-->git push -u origin main
+6. Create gitignore file in github-->add file-->create new file-->.gitignore-->type Python under the template and select it-->commit change .gitignore-->git pull
+
+7. create setup.py and requirements.txt(write pandas,numpy, seaborn, -e .)
+8. in setup.py write code below:
+
+from setuptools import find_packages,setup
+from typing import List
+
+HYPEN_E_DOT = '-e .'
+def get_requirements(file_path:str)->List[str]:
+    '''
+    This fucntion returns list of enviornments
+    '''
+
+    requirements = []
+    with open(file_path) as file_obj:
+        requirements = file_obj.readlines()
+        requirements = [req.replace('\n',' ') for req in requirements]
+        if HYPEN_E_DOT in requirements:
+            requirements.remove(HYPEN_E_DOT)
+    return requirements
+
+setup(
+
+    name = 'mlproject',
+    version='0.0.1',
+    author='amol',
+    author_email='patilamol011@gmail.com',
+    packages=find_packages(),
+    install_requires = get_requirements('requirements.txt'),
+
+)
+
+
+9. create folder src-->create file __init__.py-->this src folder will be the package
+10. pip install -r requirements.txt
