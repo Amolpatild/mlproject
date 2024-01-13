@@ -6,7 +6,7 @@
 4. conda activate venv/
 5. Create README.md
 -->git add README.md
---> git commit -m "First Commit"
+-->git commit -m "First Commit"
 -->git branch -M main
 -->git remote add origin https://github.com/Amolpatild/mlproject.git
 -->git config --global user.name "John Doe"
@@ -48,3 +48,78 @@ setup(
 
 9. create folder src-->create file __init__.py-->this src folder will be the package
 10. pip install -r requirements.txt
+-->git add .
+-->git status
+-->git commit -m "The second commit"
+-->git push -u origin main
+
+11. create the component folder under the src folder --why-->it's require for the data ingenstion process.
+-->create __init__.py file
+-->create data_ingestion.py file
+-->create data_trasnformation.py file
+-->create model_trainer.py file
+
+12. create pipeline folder
+-->create __init__.py file
+-->create prediction_pipeline.py file
+-->create training_pipeline.py file
+
+13. create the files under src
+-->create utils.py file
+-->create logger.py file
+-->create exception.py file
+
+14. write exception
+
+import sys
+import logging
+
+def error_message_detail(error,error_detail:sys):
+    _,_,exc_tb = error_detail.exc_info()
+    file_name = exc_tb.tb_frame.f_code.co_filename
+    error_message = "Error occured in python script name[{0}] line number[{1}] error message[{2}]".format(
+        file_name,exc_tb.tb_lineno,str(error)
+    )
+    return error_message
+
+class CustomException(Exception):
+    def __init__(self, error_message,error_detail:sys):
+        super().__init__(error_message)
+        self.error_message = error_message_detail(error_message,error_detail=error_detail)
+
+    def __str__(self):
+        return self.error_message
+
+**to test the file working or not******
+                                            
+if __name__ == "__main__":
+
+    try:
+        a = 1/0
+    except Exception as e:
+        logging.info("Logging has started")
+        raise CustomException(e,sys)
+****************************************
+
+15. write logger
+import logging
+import os
+from datetime import datetime
+
+LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
+logs_path = os.path.join(os.getcwd(),'logs',LOG_FILE)
+os.makedirs(logs_path,exist_ok=True)
+
+LOG_FILE_PATH = os.path.join(logs_path,LOG_FILE)
+
+logging.basicConfig(
+    filename= LOG_FILE_PATH,
+    format="[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
+)
+
+****to test the file working or not*****
+if __name__ == "__main__":
+    logging.info("Logging has started")
+****************************************
+                                            
