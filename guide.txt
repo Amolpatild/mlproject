@@ -64,7 +64,7 @@ setup(
 -->create prediction_pipeline.py file
 -->create training_pipeline.py file
 
-13. create the files under src
+13. create the files under src folder
 -->create utils.py file
 -->create logger.py file
 -->create exception.py file
@@ -72,7 +72,7 @@ setup(
 14. write exception
 
 import sys
-import logging
+from src.logger import  logging
 
 def error_message_detail(error,error_detail:sys):
     _,_,exc_tb = error_detail.exc_info()
@@ -122,4 +122,13 @@ logging.basicConfig(
 if __name__ == "__main__":
     logging.info("Logging has started")
 ****************************************
+
+remove the test part from logger and exeption files and push on git hub
+
+
+16. create notebook folder
+-->create data.folder and add csv file
+
+
+
                                             
