@@ -195,6 +195,12 @@ if __name__ == "__main__":
 
 open the terminal --> python src/components/data_ingestion.py-->check artifacts are created and log file as well.
 
+add .artificats line under the gitignore file in envrionment
+
+
+18. data transformation
+
+
 
 
                                             
